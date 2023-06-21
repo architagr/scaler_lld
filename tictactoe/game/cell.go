@@ -1,11 +1,13 @@
-package models
+package game
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type CellDTO struct {
 	col, row   int
 	cellStatus CellStatus
-	player     *PlayerDTO
+	player     IPlayer
 }
 
 func (cell *CellDTO) GetCol() int {
@@ -19,11 +21,11 @@ func (cell *CellDTO) GetRow() int {
 func (cell *CellDTO) GetCellStatus() CellStatus {
 	return cell.cellStatus
 }
-func (cell *CellDTO) GetPlayer() *PlayerDTO {
+func (cell *CellDTO) GetPlayer() IPlayer {
 	return cell.player
 }
 
-func (cell *CellDTO) SetPlayer(player *PlayerDTO) {
+func (cell *CellDTO) SetPlayer(player IPlayer) {
 	cell.player = player
 }
 
@@ -53,11 +55,3 @@ func InitCell(row, col int) *CellDTO {
 		cellStatus: CELL_STATUS_EMPTY,
 	}
 }
-
-type CellStatus string
-
-var (
-	CELL_STATUS_EMPTY  CellStatus = "EMPTY"
-	CELL_STATUS_BLOCK  CellStatus = "BLOCK"
-	CELL_STATUS_FILLED CellStatus = "FILLED"
-)

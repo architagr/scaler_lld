@@ -1,6 +1,8 @@
-package models
+package game
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type BoardDTO struct {
 	size         int
