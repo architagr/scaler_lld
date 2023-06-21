@@ -1,4 +1,4 @@
-package game
+package enums
 
 type CellStatus string
 

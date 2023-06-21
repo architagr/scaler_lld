@@ -2,24 +2,27 @@ package main
 
 import (
 	"fmt"
-	"tictactoe/game"
+	"tictactoe/contracts"
+	"tictactoe/enums"
+	"tictactoe/models"
+	winningstatergies "tictactoe/winning_statergies"
 )
 
 func main() {
 	fmt.Println("game start")
-	players := []game.IPlayer{
-		game.InitHumanPlayer(game.InitSymbol('X'), "Archit"),
-		game.InitBotPlayer(game.InitSymbol('O'), "Bot", game.DIFFICULTY_LEVEL_EASY),
+	players := []contracts.IPlayer{
+		models.InitHumanPlayer(models.InitSymbol('X'), "Archit"),
+		models.InitBotPlayer(models.InitSymbol('O'), "Bot", enums.DIFFICULTY_LEVEL_EASY),
 	}
 	size := 3
-	tictoctoeGame := game.InitGame(size, players,
-		[]game.IWinningStatergies{
-			game.InitRowWinnigStatergy(players, size),
-			game.InitColWinnigStatergy(players, size),
+	tictoctoeGame := models.InitGame(size, players,
+		[]contracts.IWinningStatergies{
+			winningstatergies.InitRowWinnigStatergy(players, size),
+			winningstatergies.InitColWinnigStatergy(players, size),
 		})
 	tictoctoeGame.PrintBoard()
 
-	for tictoctoeGame.GetGameState() == game.GAME_STATE_IN_PROGRESS {
+	for tictoctoeGame.GetGameState() == enums.GAME_STATE_IN_PROGRESS {
 		fmt.Printf("do you want to do undo y/n")
 		str := ""
 		fmt.Scanf("%s", &str)
